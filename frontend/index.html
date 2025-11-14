@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apotek Sehat Sentosa</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Sistem Manajemen Stok & Pasien Apotek Sehat Sentosa</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-page="medicines">Data Obat</a></li>
+                <li><a href="#" class="nav-link" data-page="patients">Data Pasien</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Halaman 1: Data Obat -->
+            <div id="medicines-page" class="page active">
+                <h2>Data Obat</h2>
+                
+               
+                <!-- Tabel Obat -->
+                <div class="table-section">
+                    <h3>Daftar Obat</h3>
+                    <div class="table-info">
+                        <p>Total Obat: <span id="medicineCount">0</span></p>
+                        <div class="filter-buttons">
+                            <button class="btn btn-info" id="showLowStockBtn">Stok Rendah</button>
+                            <button class="btn btn-warning" id="showNearExpiryBtn">Hampir Kadaluarsa</button>
+                            <button class="btn btn-secondary" id="showAllMedicinesBtn">Semua</button>
+                        </div>
+                    </div>
+                    <table class="data-table" id="medicinesTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Obat</th>
+                                <th>Unit</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Min Stok</th>
+                                <th>Kadaluarsa</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medicinesTableBody">
+                            <!-- Data akan diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                 <!-- Form Tambah/Edit Obat -->
+                <div class="form-section my-4">
+                    <h3>Tambah/Edit Obat</h3>
+                    <form id="medicineForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicineName">Nama Obat *</label>
+                                <input type="text" id="medicineName" placeholder="Nama obat" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineUnit">Unit *</label>
+                                <input type="text" id="medicineUnit" placeholder="Misal: tablet, kaplet, ml" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicinePrice">Harga *</label>
+                                <input type="number" id="medicinePrice" placeholder="Harga" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicineStock">Stok *</label>
+                                <input type="number" id="medicineStock" placeholder="Stok" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineMinStock">Min Stok *</label>
+                                <input type="number" id="medicineMinStock" placeholder="Min stok" min="0" value="10" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineExpiry">Tanggal Kadaluarsa *</label>
+                                <input type="date" id="medicineExpiry" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicineStatus">Status *</label>
+                                <select id="medicineStatus" required>
+                                    <option value="">-- Pilih Status --</option>
+                                    <option value="active">ACTIVE</option>
+                                    <option value="inactive">INACTIVE</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Simpan Obat</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="button" id="cancelEditBtn" class="btn btn-danger" style="display:none;">Batal Edit</button>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <!-- Halaman 2: Data Pasien -->
+            <div id="patients-page" class="page">
+                <h2>Data Pasien</h2>
+                
+                
+                <!-- Tabel Pasien -->
+                <div class="table-section">
+                    <h3>Daftar Pasien</h3>
+                    <div class="table-info">
+                        <p>Total Pasien: <span id="patientCount">0</span></p>
+                    </div>
+                    <table class="data-table" id="patientsTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Lengkap</th>
+                                <th>Nomor Telepon</th>
+                                <th>Alamat</th>
+                                <th>Terdaftar</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientsTableBody">
+                            <!-- Data akan diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Form Tambah/Edit Pasien -->
+                <div class="form-section my-4">
+                    <h3>Tambah/Edit Pasien</h3>
+                    <form id="patientForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="patientName">Nama Lengkap *</label>
+                                <input type="text" id="patientName" placeholder="Nama lengkap pasien" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientPhone">Nomor Telepon *</label>
+                                <input type="tel" id="patientPhone" placeholder="62-999-999-9999" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                <small>Format: 62-999-999-9999</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="patientAddress">Alamat *</label>
+                                <textarea id="patientAddress" placeholder="Alamat pasien" rows="3" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Simpan Pasien</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="button" id="cancelEditPatientBtn" class="btn btn-danger" style="display:none;">Batal Edit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Konfirmasi -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3>Konfirmasi</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button id="confirmYesBtn" class="btn btn-danger">Ya, Hapus</button>
+                <button id="confirmNoBtn" class="btn btn-secondary">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert/Toast -->
+    <div id="alertBox" class="alert" style="display:none;"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/medicines.js"></script>
+    <script src="js/patients.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
